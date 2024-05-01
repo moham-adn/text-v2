@@ -1,7 +1,7 @@
 let graphic;
 let font;
 
-const p5Container = document.querySelector('#p5.container')
+const p5Container = document.querySelector('#p5-container')
 
 
 function preload() {
