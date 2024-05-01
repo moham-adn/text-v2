@@ -1,3 +1,7 @@
+const easeInOutCubic = function(t) {
+  return t < 0.5 ? 4 * t * t * t : (t - 1) * (2 * t - 2) * (2 * t - 2) + 1;
+};
+
 const COLORS = ["#FF7F50", "#6495ED", "#FF69B4", "#ADFF2F"];
 const END_DURATION = 60;
 
@@ -11,8 +15,13 @@ function preload() {
 }
 
 function setup() {
-  createCanvas(windowWidth, windowHeight);
+  const p5Container = document.getElementById("p5-container");
+  const cnv = createCanvas(p5Container.clientWidth, p5Container.clientHeight);
+  cnv.parent(p5Container);
+  cnv.style('width', '100%');
+  cnv.style('height', '100%');
   graphic = createGraphics(width, height);
+  graphic.textFont(font);
   updateText();
 }
 
@@ -46,8 +55,6 @@ function draw() {
 
 function updateText() {
   graphic.clear();
-  graphic.textFont(font);
-  
   let textSize = min(width, height) * 0.7;
   graphic.textSize(textSize);
 
@@ -71,7 +78,8 @@ function updateText() {
 }
 
 function windowResized() {
-  resizeCanvas(windowWidth, windowHeight);
+  const p5Container = document.getElementById("p5-container");
+  resizeCanvas(p5Container.clientWidth, p5Container.clientHeight);
   graphic.resizeCanvas(width, height);
   updateText();
 }
